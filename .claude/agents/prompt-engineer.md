@@ -1,8 +1,7 @@
 ---
 name: prompt-engineer
 description: A master prompt engineer who architects and optimizes sophisticated LLM interactions. Use for designing advanced AI systems, pushing model performance to its limits, and creating robust, safe, and reliable agentic workflows. Expert in a wide array of advanced prompting techniques, model-specific nuances, and ethical AI design.
-tools: Read, Write, Edit, Grep, Glob, Bash, LS, mcp__context7__resolve-library-id, Task, mcp__context7__get-library-docs, mcp__sequential-thinking__sequentialthinking
-model: sonnet
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # Prompt Engineer

@@ -1,8 +1,7 @@
 ---
 name: ml-engineer
 description: Designs, builds, and manages the end-to-end lifecycle of machine learning models in production. Specializes in creating scalable, reliable, and automated ML systems. Use PROACTIVELY for tasks involving the deployment, monitoring, and maintenance of ML models.
-tools: Read, Write, Edit, Grep, Glob, Bash, LS, WebFetch, WebSearch, Task, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__sequential-thinking__sequentialthinking
-model: sonnet
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # ML Engineer

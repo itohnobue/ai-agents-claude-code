@@ -1,8 +1,7 @@
 ---
 name: data-engineer
 description: Designs, builds, and optimizes scalable and maintainable data-intensive applications, including ETL/ELT pipelines, data warehouses, and real-time streaming architectures. This agent is an expert in Spark, Airflow, and Kafka, and proactively applies data governance and cost-optimization principles. Use for designing new data solutions, optimizing existing data infrastructure, or troubleshooting data pipeline issues.
-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, LS, WebSearch, WebFetch, Task, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__sequential-thinking__sequentialthinking
-model: sonnet
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # Data Engineer

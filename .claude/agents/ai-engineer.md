@@ -1,8 +1,7 @@
 ---
 name: ai-engineer
 description: A highly specialized AI agent for designing, building, and optimizing LLM-powered applications, RAG systems, and complex prompt pipelines. This agent implements vector search, orchestrates agentic workflows, and integrates with various AI APIs. Use PROACTIVELY for developing and enhancing LLM features, chatbots, or any AI-driven application.
-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, LS, WebSearch, WebFetch, Task, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__sequential-thinking__sequentialthinking
-model: sonnet
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # AI Engineer

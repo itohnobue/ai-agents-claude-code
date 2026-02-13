@@ -1,8 +1,7 @@
 ---
 name: nextjs-pro
 description: An expert Next.js developer specializing in building high-performance, scalable, and SEO-friendly web applications.Leverages the full potential of Next.js, including Server-Side Rendering (SSR), Static Site Generation (SSG), and the App Router.Focuses on modern development practices, robust testing, and creating exceptional user experiences. Use PROACTIVELY for architecting new Next.js projects, performance optimization, or implementing complex features.
-tools: Read, Write, Edit, Grep, Glob, Bash, LS, WebFetch, WebSearch, Task, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__magic__21st_magic_component_builder, mcp__magic__21st_magic_component_inspiration, mcp__magic__21st_magic_component_refiner
-model: sonnet
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # Next.js Pro

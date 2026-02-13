@@ -1,6 +1,6 @@
 # AI Agents
 
-115 specialized agents for Claude Code. Forked from [VoltAgent](https://github.com/VoltAgent/awesome-claude-code-subagents), cleaned up and optimized for in-session loading.
+109 specialized agents for Claude Code. Curated from 4 sources: affaan-m, lst97, wshobson, and supatest. Cleaned up and optimized for in-session loading.
 
 ## Quick Start
 
@@ -30,18 +30,18 @@ Combine with [web_search_agent](https://github.com/anthropics/web_search_agent) 
 
 | Category | Count | Examples |
 |----------|-------|----------|
-| Development | 40+ | python-pro, typescript-pro, react-specialist, rust-engineer |
-| DevOps & Infra | 15+ | kubernetes-specialist, terraform-engineer, cloud-architect |
+| Development | 30+ | python-pro, typescript-pro, react-pro, golang-pro |
+| DevOps & Infra | 15+ | kubernetes-specialist, terraform-specialist, cloud-architect |
 | Data & ML/AI | 10+ | data-scientist, ml-engineer, llm-architect |
-| Security & QA | 10+ | security-engineer, penetration-tester, code-reviewer |
+| Security & QA | 15+ | security-reviewer, penetration-tester, code-reviewer |
 | Architecture | 10+ | microservices-architect, api-designer, database-optimizer |
-| Business | 15+ | product-manager, technical-writer, scrum-master |
+| Business & Design | 15+ | product-manager, ui-designer, ux-designer |
 | Debugging | 10+ | debugger, performance-engineer, incident-responder |
 
 <details>
-<summary>Full list of 115 agents</summary>
+<summary>Full list of 109 agents</summary>
 
-accessibility-tester, agent-organizer, ai-engineer, angular-architect, api-designer, api-documenter, architect-reviewer, backend-developer, blockchain-developer, build-engineer, business-analyst, chaos-engineer, cli-developer, cloud-architect, code-reviewer, competitive-analyst, compliance-auditor, content-marketer, context-manager, cpp-pro, csharp-developer, customer-success-manager, data-analyst, data-engineer, data-researcher, data-scientist, database-administrator, database-optimizer, debugger, dependency-manager, deployment-engineer, devops-engineer, devops-incident-responder, django-developer, documentation-engineer, dotnet-core-expert, dotnet-framework-4.8-expert, dx-optimizer, electron-pro, embedded-systems, error-coordinator, error-detective, fintech-engineer, flutter-expert, frontend-developer, fullstack-developer, game-developer, git-workflow-manager, golang-pro, graphql-architect, incident-responder, iot-engineer, java-architect, javascript-pro, knowledge-synthesizer, kotlin-specialist, kubernetes-specialist, laravel-specialist, legacy-modernizer, legal-advisor, llm-architect, machine-learning-engineer, market-researcher, mcp-developer, microservices-architect, ml-engineer, mlops-engineer, mobile-app-developer, mobile-developer, multi-agent-coordinator, network-engineer, nextjs-developer, nlp-engineer, payment-integration, penetration-tester, performance-engineer, performance-monitor, php-pro, platform-engineer, postgres-pro, product-manager, project-manager, prompt-engineer, python-pro, qa-expert, quant-analyst, rails-expert, react-specialist, refactoring-specialist, research-analyst, risk-manager, rust-engineer, sales-engineer, scrum-master, search-specialist, security-auditor, security-engineer, seo-specialist, spring-boot-engineer, sql-pro, sre-engineer, swift-expert, task-distributor, technical-writer, terraform-engineer, test-automator, tooling-engineer, trend-analyst, typescript-pro, ui-designer, ux-researcher, vue-expert, websocket-engineer, wordpress-master, workflow-orchestrator
+accessibility-tester, agent-organizer, ai-engineer, angular-architect, api-designer, api-documenter, architect, backend-architect, build-error-resolver, cli-developer, cloud-architect, code-reviewer, database-reviewer, debugger, deployment-engineer, devops-engineer, devops-incident-responder, devops-troubleshooter, diagnostic-command-generator, diagnostics-gui, directus-specialist, discovery-helper, discovery-suggester, doc-updater, documentation-expert, dotnet-core-expert, dotnet-framework-4.8-expert, dx-optimizer, e2e-runner, electron-pro, embedded-systems, event-sourcing-architect, frontend-developer, full-stack-developer, golang-pro, go-build-resolver, go-reviewer, graphql-architect, hybrid-cloud-architect, incident-responder, java-architect, java-pro, javascript-pro, julia-pro, kotlin-expert, kubernetes-architect, legacy-modernizer, llm-architect, logger, master-control-gui, mermaid-expert, microservices-architect, mobile-developer, mlops-engineer, monorepo-architect, network-engineer, nextjs-pro, nlp-engineer, nx-console-gui, offline-mode-implmentor, performance-engineer, php-pro, planner, platform-engineer, playwright-test-architect, playwright-test-automater, playwright-test-data-manager, playwright-test-executor, playwright-test-framework, playwright-test-orchestrator, plugin-installer, plugin-manager, plugin-marketplace, plugin-updater, postgres-pro, prod-mode-implmentor, product-manager, project-manager, prompt-engineer, pro-plugins-installer, pro-plugins-marketplace, pro-plugins-updater, pro-updater, python-pro, python-reviewer, qa-expert, quick-run-gui, rails-expert, react-pro, refactor-cleaner, refactoring-specialist, release-note-architect, release-note-generator, rust-pro, scala-pro, script-to-plugin-migrater, security-auditor, security-reviewer, service-mesh-expert, shell-helpers-guide, spring-boot-expert, sql-pro, sre-engineer, swift-expert, tdd-guide, terraform-specialist, test-automator, tracer, tracer-ui, typescript-pro, ui-designer, ux-designer, vector-database-engineer, vue-specialist
 
 </details>
 

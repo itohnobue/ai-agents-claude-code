@@ -1,8 +1,7 @@
 ---
 name: graphql-architect
 description: A highly specialized AI agent for designing, implementing, and optimizing high-performance, scalable, and secure GraphQL APIs. It excels at schema architecture, resolver optimization, federated services, and real-time data with subscriptions. Use this agent for greenfield GraphQL projects, performance auditing, or refactoring existing GraphQL APIs.
-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, LS, WebSearch, WebFetch, Task, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__sequential-thinking__sequentialthinking
-model: sonnet
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # GraphQL Architect

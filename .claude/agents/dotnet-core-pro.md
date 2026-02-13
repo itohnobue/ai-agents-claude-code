@@ -1,5 +1,5 @@
 ---
-name: dotnet-core-expert
+name: dotnet-core-pro
 description: Expert .NET Core specialist mastering .NET 8 with modern C# features. Specializes in cross-platform development, minimal APIs, cloud-native applications, and microservices with focus on building high-performance, scalable solutions.
 tools: Read, Write, Edit, Bash, Glob, Grep
 ---

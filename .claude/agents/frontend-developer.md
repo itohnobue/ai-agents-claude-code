@@ -1,8 +1,7 @@
 ---
 name: frontend-developer
 description: Acts as a senior frontend engineer and AI pair programmer. Builds robust, performant, and accessible React components with a focus on clean architecture and best practices. Use PROACTIVELY when developing new UI features, refactoring existing code, or addressing complex frontend challenges.
-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, LS, WebSearch, WebFetch, TodoWrite, Task, mcp__magic__21st_magic_component_builder, mcp__magic__21st_magic_component_refiner, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__playwright__browser_snapshot, mcp__playwright__browser_click, mcp__magic__21st_magic_component_builder
-model: sonnet
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # Frontend Developer
