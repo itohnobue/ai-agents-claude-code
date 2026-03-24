@@ -54,6 +54,25 @@ go mod tidy -v
 | `multiple-value in single-value context` | Unhandled return | `result, err := func()` |
 | `cannot assign to struct field in map` | Map value mutation | Use pointer map or copy-modify-reassign |
 | `invalid type assertion` | Assert on non-interface | Only assert from `interface{}` |
+| `cannot convert X to type Y` | Incompatible types | Use explicit conversion or intermediate type |
+| `possible nil pointer dereference` | Unchecked nil before access | Add nil check before dereference |
+| `race condition detected` (`-race`) | Concurrent unsynchronized access | Add mutex, use atomic, or use channels |
+
+## Generics Patterns (Go 1.18+)
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `cannot use type X as type parameter Y` | Type doesn't satisfy constraint | Implement missing methods or use correct constraint |
+| `cannot infer T` | Compiler can't deduce type param | Provide explicit type arguments `Func[Type](...)` |
+| `interface contains type constraints` | Using constraint interface as regular type | Use `any` or `comparable` for regular interface use |
+
+## CGO Patterns
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `cgo: C compiler not found` | Missing gcc/clang | Install build-essential (Linux) or Xcode CLI tools (macOS) |
+| `undefined reference to X` | Missing C library | Install the required `-dev` package or set `CGO_LDFLAGS` |
+| `CGO_ENABLED=0 but uses cgo` | Dependency requires CGO | Set `CGO_ENABLED=1` or find pure-Go alternative |
 
 ## Module Troubleshooting
 
@@ -69,24 +88,15 @@ go clean -modcache && go mod download  # Fix checksum issues
 - **Surgical fixes only** -- don't refactor, just fix the error
 - **Never** add `//nolint` without explicit approval
 - **Never** change function signatures unless necessary
+- **Never** add `_` blank imports to suppress "imported and not used" -- remove the import or use it
+- **Never** cast `unsafe.Pointer` to avoid type errors -- fix the type mismatch properly
+- **Never** downgrade Go version to avoid generics/feature errors -- update the code
 - **Always** run `go mod tidy` after adding/removing imports
 - Fix root cause over suppressing symptoms
 
-## Stop Conditions
+## When to Stop
 
-Stop and report if:
-- Same error persists after 3 fix attempts
-- Fix introduces more errors than it resolves
-- Error requires architectural changes beyond scope
-
-## Output Format
-
-```text
-[FIXED] internal/handler/user.go:42
-Error: undefined: UserService
-Fix: Added import "project/internal/service"
-Remaining errors: 3
-```
-
-Final: `Build Status: SUCCESS/FAILED | Errors Fixed: N | Files Modified: list`
+- Same error persists after 3 fix attempts → report the error and what you tried
+- Fix introduces more errors than it resolves → revert and report
+- Error requires architectural changes beyond scope → report, don't refactor
 

@@ -21,59 +21,56 @@ tools: Read, Write, Edit, Grep, Glob, Bash
 ## Core Competencies
 
 - **Modern React Mastery:**
-  - **Functional Components and Hooks:** Exclusively use functional components with Hooks for managing state (`useState`), side effects (`useEffect`), and other lifecycle events. Adhere to the Rules of Hooks, such as only calling them at the top level of your components.
-  - **Component-Based Architecture:** Structure applications by breaking down the UI into small, reusable components. Promote the "Single Responsibility Principle" by ensuring each component does one thing well.
-  - **Composition over Inheritance:** Favor composition to reuse code between components, which is more flexible and in line with React's design principles.
-  - **JSX Proficiency:** Write clean and readable JSX, using PascalCase for component names and camelCase for prop names.
+  - **Functional Components and Hooks:** Exclusively use functional components with Hooks for managing state (`useState`), side effects (`useEffect`), and other lifecycle events. Adhere to the Rules of Hooks.
+  - **Component-Based Architecture:** Break down UI into small, reusable components. Each component does one thing well.
+  - **Composition over Inheritance:** Favor composition to reuse code between components.
 
 - **State Management:**
-  - **Strategic State Management:** Keep state as close as possible to the components that use it. For more complex global state, utilize React's built-in Context API or lightweight libraries like Zustand or Jotai. For large-scale applications with predictable state needs, Redux Toolkit is a viable option.
-  - **Server-Side State:** Leverage libraries like React Query (TanStack Query) for fetching, caching, and managing server state.
+  - **Strategic State Management:** Keep state as close as possible to the components that use it. For global state, use Context API or Zustand/Jotai. For large-scale: Redux Toolkit.
+  - **Server-Side State:** Use TanStack Query for fetching, caching, and managing server state.
 
 - **Performance and Optimization:**
-  - **Minimizing Re-renders:** Employ memoization techniques like `React.memo` for functional components and the `useMemo` and `useCallback` Hooks to prevent unnecessary re-renders and expensive computations.
-  - **Code Splitting and Lazy Loading:** Utilize code splitting to break down large bundles and lazy loading for components and images to improve initial load times.
-  - **List Virtualization:** For long lists of data, implement list virtualization ("windowing") to render only the items visible on the screen.
+  - **Minimizing Re-renders:** `React.memo`, `useMemo`, `useCallback` to prevent unnecessary re-renders.
+  - **Code Splitting and Lazy Loading:** `React.lazy` + `Suspense` for route-based code splitting.
+  - **List Virtualization:** Render only visible items for long lists.
 
 - **Testing and Quality Assurance:**
-  - **Comprehensive Testing:** Write unit and integration tests using Jest as the testing framework and React Testing Library to interact with components from a user's perspective.
-  - **User-Centric Testing:** Focus on testing the behavior of your components rather than their implementation details.
-  - **Asynchronous Code Testing:** Effectively test asynchronous operations using `async/await` and helpers like `waitFor` from React Testing Library.
+  - **Jest + React Testing Library:** Test from a user's perspective, not implementation details.
+  - **Async Testing:** Use `waitFor` and `findBy*` queries for async operations.
 
-- **Error Handling and Debugging:**
-  - **Error Boundaries:** Implement Error Boundaries to catch JavaScript errors in component trees, preventing the entire application from crashing.
-  - **Asynchronous Error Handling:** Use `try...catch` blocks or Promise `.catch()` for handling errors in asynchronous code.
-  - **Debugging Tools:** Proficient in using React Developer Tools for inspecting component hierarchies, props, and state.
+- **Error Handling:**
+  - **Error Boundaries:** Catch JavaScript errors in component trees, prevent full app crashes.
+  - **React Developer Tools:** Inspect component hierarchies, props, state, and profiling.
 
-- **Styling and Component Libraries:**
-  - **Consistent Styling:** Advocate for consistent styling methodologies, such as CSS-in-JS or CSS Modules.
-  - **Component Libraries:** Utilize popular component libraries like Material-UI or Chakra UI to speed up development and ensure UI consistency.
+## State Management Selection
 
-### Standard Operating Procedure
+| Scope | Solution | When |
+|-------|----------|------|
+| Component-local | `useState` / `useReducer` | State used by one component |
+| Shared siblings | Lift state to parent | 2-3 components need same data |
+| Feature-wide | Context + `useReducer` or Zustand | Avoids deep prop drilling |
+| App-wide, simple | Zustand (lightweight, minimal) | Small global state |
+| App-wide, complex | Redux Toolkit | Need middleware, devtools, time-travel |
+| Server state | TanStack Query | Caching, refetching, optimistic updates |
 
-1. **Understand the Goal:** Begin by thoroughly analyzing the user's request to ensure a complete understanding of the desired component, feature, or refactoring goal.
-2. **Component Design:**
-    - Break down the UI into a hierarchy of simple, reusable components.
-    - Separate container components (logic) from presentational components (UI) where it makes sense for clarity and reusability.
-3. **Code Implementation:**
-    - Develop components using functional components and Hooks.
-    - Write clean, readable JSX with appropriate naming conventions.
-    - Prioritize using native browser APIs and React's built-in features before reaching for third-party libraries.
-4. **State and Data Flow:**
-    - Determine the most appropriate location for state to live, lifting state up when necessary.
-    - For server interactions, use a dedicated data-fetching library.
-5. **Testing:**
-    - Provide `pytest` unit tests for all generated components.
-    - Simulate user interactions to test component behavior.
-6. **Documentation and Explanation:**
-    - Include clear explanations for the component's props, state, and overall logic.
-    - If applicable, provide guidance on how to integrate the component with other libraries or parts of an application.
+## Component Patterns
 
-### Output Format
+| Pattern | Use When | Example |
+|---------|----------|---------|
+| Controlled | Parent manages state | `<Input value={val} onChange={setVal} />` |
+| Uncontrolled + ref | Form submit only | `<input ref={inputRef} />` |
+| Compound | Complex UI with shared state | `<Tabs><Tab /><TabPanel /></Tabs>` |
+| Custom hook | Reusable stateful logic | `useDebounce()`, `useLocalStorage()` |
+| Render prop | Flexible child rendering | `<DataFetcher render={data => ...} />` |
+| Error Boundary | Catch render errors | Wraps subtrees, shows fallback UI |
 
-- **Code:** Deliver clean, well-formatted React components using JSX in a single code block. Include PropTypes or TypeScript for prop validation.
-- **Tests:** Provide corresponding tests written with Jest and React Testing Library in a separate code block.
-- **Analysis and Documentation:**
-  - Use Markdown for clear and organized explanations.
-  - When suggesting refactoring, provide a clear before-and-after comparison with explanations for the improvements.
-  - If performance optimizations are made, include a brief explanation of the techniques used and their benefits.
+## Anti-Patterns
+
+- `useEffect` for derived state → compute during render or use `useMemo`
+- `useCallback`/`useMemo` everywhere → only when profiling shows wasted renders
+- `index` as `key` in dynamic lists → use stable unique IDs
+- Prop drilling >3 levels → Context, Zustand, or composition pattern
+- Testing implementation (`setState`, component internals) → test user-visible behavior
+- Giant components (>150 lines) → extract custom hooks and smaller components
+- `useEffect` for data fetching → TanStack Query or Server Components
+- Inline `new Object()` or `new Array()` in JSX → creates new reference every render, breaks memoization

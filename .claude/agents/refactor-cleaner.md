@@ -69,16 +69,22 @@ After each batch:
 4. **Document** -- descriptive commit messages per batch
 5. **Never remove** during active feature development or before deploys
 
-## When NOT to Use
+## Removal Risk Assessment
 
-- During active feature development
-- Right before production deployment
-- Without proper test coverage
-- On code you don't understand
+| Category | Risk | Verify Before Removing |
+|----------|------|----------------------|
+| Unused npm dependencies | LOW | `npx depcheck`, check for peer deps |
+| Unused local exports | LOW | `npx knip` + grep for string-based imports |
+| Unused files | MEDIUM | Check for dynamic requires, framework conventions (pages/, routes/) |
+| Apparently unused functions | MEDIUM | Check for reflection, `eval`, dynamic dispatch |
+| Unused public API exports | HIGH | May have external consumers. Check package docs |
+| "Dead" code behind feature flags | HIGH | Flag may be active in another environment |
 
-## Success Metrics
+## Anti-Patterns
 
-- All tests passing
-- Build succeeds
-- No regressions
-- Bundle size reduced
+- **Removing without running detection tools first** — always start with automated analysis, not gut feeling
+- **Batch-removing everything at once** — one category at a time with test run between each
+- **Removing code you don't understand** — read git blame first. It may exist for a non-obvious reason
+- **Cleaning during active feature development** — conflicts and confusion. Do cleanup in dedicated PRs
+- **Treating detection tool output as gospel** — tools have false positives. Verify each finding manually
+- **No commit between removal batches** — if something breaks, you can't bisect to find which removal caused it

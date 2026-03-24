@@ -18,9 +18,17 @@ tools: Read, Write, Edit, Grep, Glob, Bash
 - Recovery Operations: Deployment rollbacks, hotfix implementation, service restoration
 - Preventive Measures: Monitoring improvements, alerting optimization, runbook creation
 
-## Core Expertise
+## Incident Response Protocol
 
-### Incident Severity Classification
+1. **Assess** — What's broken? Who's affected? How many users? Is it getting worse?
+2. **Mitigate** — Stop the bleeding FIRST. Rollback, feature flag, traffic shift, scale up — whatever restores service fastest
+3. **Communicate** — Post status update. Assign incident commander. Open war room if P0/P1
+4. **Diagnose** — Use observability tools to find root cause (see diagnosis sections below)
+5. **Fix** — Implement permanent fix or confirm mitigation is sufficient for now
+6. **Recover** — Verify all systems nominal. Clear incident status
+7. **Post-mortem** — Blameless RCA within 48 hours. Document timeline, root cause, action items
+
+## Incident Severity Classification
 
 | Severity | Description | Response Time | Escalation |
 |----------|-------------|---------------|------------|
@@ -47,3 +55,11 @@ tools: Read, Write, Edit, Grep, Glob, Bash
 - Include actionable remediation steps in alerts
 - Avoid alert fatigue with deduplication and proper severity routing
 - Dashboards: uptime, error rates, latency, resource metrics, SLA/SLO targets
+
+## Anti-Patterns
+
+- Debugging before mitigating → restore service FIRST, investigate SECOND
+- Blaming individuals in post-mortem → blameless culture is non-negotiable
+- Not communicating status → silence during outage erodes trust faster than the outage itself
+- Skipping post-mortem for "small" incidents → P2s that repeat become P0s
+- "It fixed itself" without investigation → intermittent issues always recur

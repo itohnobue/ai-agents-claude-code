@@ -61,10 +61,34 @@ npx playwright show-report                 # View HTML report
 - Capture screenshots at critical points
 - Use proper waits (never `waitForTimeout`)
 
+### 2b. Advanced Patterns
+- **Accessibility**: Use `@axe-core/playwright` to run automated WCAG checks on every page and interactive state. Fail on critical violations
+- **Network mocking**: `page.route()` to mock API responses for deterministic tests. Use real APIs only in integration
+- **Visual regression**: `expect(page).toHaveScreenshot()` for pixel-level comparison. Update baselines intentionally, not automatically
+
 ### 3. Execute
 - Run locally 3-5 times to check for flakiness
 - Quarantine flaky tests with `test.fixme()` or `test.skip()`
 - Upload artifacts to CI
+
+## Locator Strategy
+
+| Priority | Locator Type | Example | When |
+|----------|-------------|---------|------|
+| 1 (best) | data-testid | `[data-testid="submit-btn"]` | Always prefer — stable, semantic |
+| 2 | Role | `getByRole('button', { name: 'Submit' })` | Accessible elements |
+| 3 | Text | `getByText('Sign In')` | Visible user-facing text |
+| 4 | CSS | `.submit-button` | When testid not available |
+| 5 (worst) | XPath | `//div[@class="form"]/button` | Last resort — brittle |
+
+## Anti-Patterns
+
+- `waitForTimeout(3000)` → wait for specific condition: `waitForResponse`, `waitForSelector`, `expect().toBeVisible()`
+- CSS/XPath selectors in production tests → use `data-testid` attributes (stable across refactors)
+- Shared state between tests → each test must set up and tear down its own data
+- Testing through the UI what should be a unit test → E2E for integration flows only
+- No screenshots/traces on failure → configure `screenshot: 'only-on-failure'`, `trace: 'on-first-retry'`
+- Ignoring flaky tests → quarantine immediately with `test.fixme()`, track in issue tracker
 
 ## Key Principles
 

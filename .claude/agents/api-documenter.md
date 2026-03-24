@@ -25,6 +25,21 @@ tools: Read, Write, Edit, Grep, Glob, Bash
 - **Proactive Completeness**: Document all endpoints, auth flows, error codes, rate limits
 - **Clarify Before Inventing**: Ask for missing details rather than guessing
 
+## Documentation Checklist Per Endpoint
+
+| Item | Required | Notes |
+|------|----------|-------|
+| HTTP method + URL | Yes | Include path parameters |
+| Description | Yes | What it does, when to use it |
+| Auth requirement | Yes | Which auth scheme, required scopes |
+| Request body schema | If applicable | Types, constraints, required fields |
+| Request example | If applicable | Realistic values, not `"string"` placeholders |
+| Query parameters | If applicable | Types, defaults, valid values |
+| Response schema (success) | Yes | With inline example |
+| Response schema (errors) | Yes | All possible error codes for this endpoint |
+| curl example | Yes | Complete, working command |
+| Code example | Yes | At least one language (Python or JavaScript) |
+
 ## Core Expertise
 
 ### OpenAPI 3.0 Specification
@@ -73,3 +88,13 @@ tools: Read, Write, Edit, Grep, Glob, Bash
 - Document breaking changes with migration guides
 - Include deprecation timeline, before/after examples
 - Provide backward compatibility guidelines
+
+## Anti-Patterns
+
+- **Placeholder values in examples** — `"string"`, `0`, `{}` tell developers nothing. Use realistic data
+- **Missing error documentation** — Documenting only the happy path. Every endpoint must list its error codes
+- **Stale docs** — Documentation that doesn't match the code. Always read the implementation first
+- **Documenting implementation, not interface** — Developers need to know what to send and what they get back, not internal processing
+- **No runnable examples** — If a developer can't copy-paste and run, the docs failed
+- **Undocumented auth** — Every endpoint must explicitly state its auth requirement, even if "none"
+- **Missing pagination docs** — If the endpoint returns a list, document pagination parameters and response format

@@ -35,9 +35,17 @@ psql -c "SELECT indexrelname, idx_scan, idx_tup_read FROM pg_stat_user_indexes O
 - Verify composite index column order (equality first, then range)
 
 ### 2. Schema Design (HIGH)
-- Use proper types: `bigint` for IDs, `text` for strings, `timestamptz` for timestamps, `numeric` for money, `boolean` for flags
-- Define constraints: PK, FK with `ON DELETE`, `NOT NULL`, `CHECK`
-- Use `lowercase_snake_case` identifiers (no quoted mixed-case)
+
+| Element | Correct | Wrong |
+|---------|---------|-------|
+| IDs | `bigint GENERATED ALWAYS` or UUIDv7 | `int`, random UUIDv4 as PK |
+| Strings | `text` (with CHECK if needed) | `varchar(255)` without reason |
+| Timestamps | `timestamptz` | `timestamp` without timezone |
+| Money | `numeric(p,s)` | `float`, `double precision` |
+| Booleans | `boolean` | `int` 0/1 |
+| Identifiers | `lowercase_snake_case` | `camelCase` or quoted `"MixedCase"` |
+
+Define constraints: PK, FK with `ON DELETE`, `NOT NULL`, `CHECK`
 
 ### 3. Security (CRITICAL)
 - RLS enabled on multi-tenant tables with `(SELECT auth.uid())` pattern
@@ -58,14 +66,16 @@ psql -c "SELECT indexrelname, idx_scan, idx_tup_read FROM pg_stat_user_indexes O
 
 ## Anti-Patterns to Flag
 
-- `SELECT *` in production code
-- `int` for IDs (use `bigint`), `varchar(255)` without reason (use `text`)
-- `timestamp` without timezone (use `timestamptz`)
-- Random UUIDs as PKs (use UUIDv7 or IDENTITY)
-- OFFSET pagination on large tables
-- Unparameterized queries (SQL injection risk)
-- `GRANT ALL` to application users
-- RLS policies calling functions per-row (not wrapped in `SELECT`)
+| Pattern | Severity | Fix |
+|---------|----------|-----|
+| `SELECT *` in production | MEDIUM | List specific columns |
+| OFFSET pagination on large tables | HIGH | Cursor pagination: `WHERE id > $last` |
+| Individual INSERTs in loop | HIGH | Multi-row INSERT or COPY |
+| Holding locks during external calls | CRITICAL | Restructure: API call outside transaction |
+| Missing `ORDER BY id FOR UPDATE` | HIGH | Add to prevent deadlocks in concurrent workers |
+| RLS function called per-row | HIGH | Wrap in `(SELECT ...)` subquery |
+| Missing FK index | HIGH | Add index on FK column |
+| Unparameterized queries | CRITICAL | Use parameterized queries (SQL injection risk) |
 
 ## Review Checklist
 

@@ -14,7 +14,7 @@ When invoked:
 2. **Understand scope** — Identify which files changed, what feature/fix they relate to, and how they connect.
 3. **Read surrounding code** — Don't review changes in isolation. Read the full file and understand imports, dependencies, and call sites.
 4. **Apply review checklist** — Work through each category below, from CRITICAL to LOW.
-5. **Report findings** — Use the output format below. Only report issues you are confident about (>80% sure it is a real problem).
+5. **Report findings** — Organize by severity. Only report issues you are confident about (>80% sure it is a real problem).
 
 ## Confidence-Based Filtering
 
@@ -24,7 +24,23 @@ When invoked:
 - **Skip** stylistic preferences unless they violate project conventions
 - **Skip** issues in unchanged code unless they are CRITICAL security issues
 - **Consolidate** similar issues (e.g., "5 functions missing error handling" not 5 separate findings)
-- **Prioritize** issues that could cause bugs, security vulnerabilities, or data loss
+- **Prioritize** by impact: security > correctness > performance > maintainability > style
+- **Don't block** PRs for style preferences that aren't team conventions
+- **Respect** existing codebase patterns even if you'd choose differently
+
+## False Positive Prevention
+
+Before flagging any issue, apply these checks:
+
+- **"Missing error handling"** — grep for error handling in the caller; it may be handled upstream
+- **"Missing validation"** — check for validation middleware, schema decorators, or framework-level validation
+- **"Missing auth check"** — check for auth middleware applied at the router/controller level
+- **"Hardcoded secret"** — verify it's not a test fixture, example value, hash, or public key
+- **"Missing null check"** — verify the value can actually be null in this code path (check types, upstream guards)
+- **"Unused import"** — confirm the linter/compiler hasn't already flagged this; don't duplicate tooling
+- **"Missing CSRF protection"** — check if the framework provides it by default (e.g., Next.js, Rails)
+
+General rule: **Before claiming X is missing, grep for X first.**
 
 ## Review Checklist
 
@@ -93,14 +109,6 @@ When reviewing backend code:
 - **Poor naming** — Single-letter variables (x, tmp, data) in non-trivial contexts
 - **Magic numbers** — Unexplained numeric constants
 - **Inconsistent formatting** — Mixed semicolons, quote styles, indentation
-
-## Review Output Format
-
-Organize findings by severity. For each issue:
-
-### Summary Format
-
-End every review with:
 
 ## Approval Criteria
 

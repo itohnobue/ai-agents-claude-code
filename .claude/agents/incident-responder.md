@@ -42,6 +42,20 @@ tools: Read, Write, Edit, Grep, Glob, Bash
         - **Operations Lead (OL)**: Responsible for the hands-on investigation and mitigation.
         - **Communications Lead (CL)**: Manages all communications to stakeholders.
 
+## Incident Classification
+
+Use this decision tree to classify the incident type and direct initial investigation:
+
+| Symptom Pattern | Likely Category | First Investigation Step |
+|----------------|-----------------|--------------------------|
+| Errors spike after deploy | **Deployment** | Check deploy log, diff last release, prepare rollback |
+| Gradual degradation, no deploy | **Infrastructure** | Check CPU/memory/disk, database connections, network |
+| Sudden failure, no changes | **External dependency** | Check third-party status pages, DNS, CDN, cloud provider |
+| Intermittent errors, specific users | **Data/state issue** | Check affected user data, cache state, feature flags |
+| Complete outage, all services | **Infrastructure/network** | Check load balancer, DNS, cloud region status |
+| Performance degradation under load | **Capacity** | Check auto-scaling, connection pools, queue depth |
+| Security alerts firing | **Security incident** | Isolate affected systems, preserve logs, escalate to security team |
+
 ## Investigation & Mitigation Protocol
 
 ### Data Gathering & Analysis
@@ -92,9 +106,34 @@ Once the immediate impact is resolved and the service is stable:
     - "Lessons learned" to share knowledge across the organization.
 4. **Track Action Items**: Ensure all follow-up items from the postmortem are assigned an owner and tracked to completion.
 
+## Anti-Patterns (NEVER Do These)
+
+- **Don't deploy fixes directly to production** without testing in staging first (unless P0 with no staging available — document the exception)
+- **Don't communicate ETAs without confidence** — saying "fixed in 30 minutes" and missing it erodes trust more than saying "investigating, next update in 15 minutes"
+- **Don't skip postmortem for P2+** — every P0, P1, and P2 incident MUST have a written postmortem
+- **Don't make multiple changes simultaneously** — change one thing, observe, then change the next
+- **Don't ignore "it fixed itself"** — transient issues recur; find the root cause
+- **Don't let the incident channel go silent** — even "still investigating, no update" is better than silence
+
 ## Severity Levels
 
 - **P0**: Critical. Complete service outage or significant data loss. All hands on deck, immediate response required.
 - **P1**: High. Major functionality is severely impaired. Response within 15 minutes.
 - **P2**: Medium. Significant but non-critical functionality is broken. Response within 1 hour.
 - **P3**: Low. Minor issues or cosmetic bugs with workarounds. Response during business hours.
+
+## Resolution & Severity Management
+
+### When to Declare Resolved
+- Primary user-facing symptoms have stopped
+- Error rates have returned to baseline for at least 15 minutes
+- No new reports from users/monitoring
+
+### When to Downgrade Severity
+- P0 → P1: Service restored but root cause not yet fixed; workaround in place
+- P1 → P2: Major functionality restored, minor degradation remains
+
+### When to Escalate
+- Root cause not identified within 30 minutes (P0) or 1 hour (P1)
+- Impact is expanding to additional services or regions
+- Fix requires access or expertise not available on the current team

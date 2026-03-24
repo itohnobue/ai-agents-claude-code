@@ -92,6 +92,22 @@ Links to other codemaps
 
 **OPTIONAL:** Minor bug fixes, cosmetic changes, internal refactoring.
 
----
+## Documentation Types
+
+| Type | Source of Truth | Tool | Update Frequency |
+|------|----------------|------|-----------------|
+| Codemaps | Code structure (imports, exports) | AST analysis, madge | Every major feature |
+| API docs | Route definitions, handlers | JSDoc/TSDoc extraction | Every API change |
+| README | Project state | Manual + code references | Every setup change |
+| Env vars | `.env.example`, config files | Grep + document | Every new variable |
+| Architecture | Code + diagrams | Manual review | Every architectural change |
+
+## Anti-Patterns
+
+- Writing documentation from memory instead of code → always read the source, never assume
+- Copying code snippets without verifying they work → run examples before documenting
+- Documenting every internal function → focus on public APIs and architecture
+- Leaving "Last Updated" dates stale → update timestamps on every edit
+- Single monolithic doc → split by area, keep under 500 lines each
 
 **Remember**: Documentation that doesn't match reality is worse than no documentation. Always generate from the source of truth.

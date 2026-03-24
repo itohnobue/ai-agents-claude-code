@@ -67,6 +67,18 @@ Flag these patterns immediately:
 | No rate limiting | HIGH | Add rate limiting middleware |
 | Logging passwords/secrets | MEDIUM | Sanitize log output |
 
+## Context-Dependent Review
+
+Adjust your review focus based on the application type:
+
+| App Type | Focus Areas | Lower Priority |
+|----------|-------------|----------------|
+| **Web App** | XSS, CSRF, session management, CSP headers | CLI argument injection |
+| **REST API** | Auth/authz, input validation, rate limiting, CORS | XSS (no HTML rendering) |
+| **CLI Tool** | Argument injection, file path traversal, privilege escalation | CSRF, CORS, session management |
+| **Library/SDK** | Input validation at boundaries, safe defaults, no hardcoded secrets | Auth, rate limiting (caller's job) |
+| **Microservice** | Service-to-service auth, secret management, network policies | CSRF, XSS |
+
 ## Key Principles
 
 1. **Defense in Depth** — Multiple layers of security
@@ -77,12 +89,17 @@ Flag these patterns immediately:
 
 ## Common False Positives
 
-- Environment variables in `.env.example` (not actual secrets)
-- Test credentials in test files (if clearly marked)
-- Public API keys (if actually meant to be public)
-- SHA256/MD5 used for checksums (not passwords)
+Do NOT flag these without additional context proving they are real issues:
 
-**Always verify context before flagging.**
+- Environment variables in `.env.example` or `.env.sample` (not actual secrets)
+- Test credentials in test files (`test_password`, `mock_api_key`, fixtures)
+- Public API keys explicitly meant to be client-side (Stripe publishable keys, Google Maps keys)
+- SHA256/MD5 used for checksums, ETags, or cache keys (not password hashing)
+- Base64-encoded strings that are not secrets (configuration, serialized data)
+- `localhost` / `127.0.0.1` URLs in development configuration
+- Placeholder values like `YOUR_API_KEY_HERE`, `changeme`, `xxx`
+
+**Always verify context before flagging. Grep for usage patterns before claiming something is a secret.**
 
 ## Emergency Response
 
@@ -106,5 +123,20 @@ If you find a CRITICAL vulnerability:
 - No secrets in code
 - Dependencies up to date
 - Security checklist complete
+
+## Security Testing Tools
+
+- **SAST** (Static): Semgrep, SonarQube, CodeQL — run on every PR for injection, hardcoded secrets, unsafe patterns
+- **DAST** (Dynamic): OWASP ZAP, Burp Suite — run against staging for runtime vulnerabilities
+- **Dependency Scanning**: Snyk, npm audit, pip-audit, Trivy — check for known CVEs
+- **Secret Scanning**: gitleaks, trufflehog — scan git history for leaked credentials
+
+## Compliance Awareness
+
+When reviewing code in regulated environments, verify alignment with:
+- **OWASP ASVS** — Application Security Verification Standard (levels 1-3)
+- **PCI DSS** — Payment card data handling requirements
+- **SOC 2** — Trust service criteria (security, availability, confidentiality)
+- **GDPR** — Personal data protection (consent, right to erasure, data minimization)
 
 **Remember**: Security is not optional. One vulnerability can cost users real financial losses. Be thorough, be paranoid, be proactive.
