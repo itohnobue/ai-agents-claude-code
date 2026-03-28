@@ -1,6 +1,6 @@
 # AI Agents
 
-109 specialized agents for Claude Code, optimized for GLM 4.7 subagent use. Built through extensive research (Oparin n=600 evaluation, scientific literature on LLM prompting, A/B testing with 6 agent variants) and manual quality review of every agent file.
+108 specialized agents for Claude Code. Built through extensive research (Oparin n=600 evaluation, scientific literature on LLM prompting, A/B testing with 6 agent variants) and manual quality review of every agent file.
 
 ## Quick Start
 
@@ -14,7 +14,7 @@ Each agent is crafted based on research-proven principles:
 
 - **Domain checklists** over generic advice — specific failure patterns the model might miss
 - **Decision tables** encoding when to choose what — prevents wrong technology/pattern choices
-- **Anti-patterns** preventing known failures — directly addresses GLM's precision problem
+- **Anti-patterns** preventing known failures — directly addresses common precision problems
 - **Knowledge activation triggers** — section headers that activate the model's latent expertise
 - **No rigid output templates** — proven #1 score killer in evaluations
 - **No adjective lists** — zero measured lift over bare model
@@ -33,9 +33,9 @@ Each agent is crafted based on research-proven principles:
 | Operations | 10+ | sre-engineer, observability-engineer, incident-responder, performance-engineer |
 
 <details>
-<summary>Full list of 109 agents</summary>
+<summary>Full list of 108 agents</summary>
 
-agent-organizer, ai-engineer, api-designer, api-documenter, architect, backend-architect, backend-security-coder, bash-pro, build-engineer, build-error-resolver, c-pro, cli-developer, cloud-architect, code-reviewer, cpp-pro, csharp-pro, data-engineer, data-researcher, data-scientist, database-architect, database-optimizer, database-reviewer, debugger, dependency-manager, deployment-engineer, design-system-architect, devops-engineer, devops-incident-responder, devops-troubleshooter, django-pro, doc-updater, docs-architect, documentation-pro, dotnet-core-pro, dotnet-framework-pro, dx-optimizer, e2e-runner, electron-pro, elixir-pro, event-sourcing-architect, fastapi-pro, flutter-pro, frontend-developer, frontend-security-coder, full-stack-developer, go-build-resolver, go-reviewer, golang-pro, graphql-architect, haskell-pro, hybrid-cloud-architect, incident-responder, ios-pro, java-pro, javascript-pro, julia-pro, kotlin-pro, kubernetes-architect, legacy-modernizer, llm-architect, mcp-developer, mermaid-pro, microservices-architect, ml-engineer, mlops-engineer, mobile-developer, mobile-security-coder, monorepo-architect, network-engineer, nextjs-pro, observability-engineer, penetration-tester, performance-engineer, php-pro, planner, platform-engineer, posix-shell-pro, postgres-pro, product-manager, prompt-engineer, python-pro, python-reviewer, qa-pro, rails-pro, react-pro, refactor-cleaner, research-analyst, ruby-pro, rust-pro, scala-pro, security-reviewer, service-mesh-pro, spring-boot-pro, sql-pro, sre-engineer, swift-pro, tdd-guide, technical-writer, terraform-pro, test-automator, threat-modeling-pro, tutorial-engineer, typescript-pro, ui-designer, ux-designer, vector-database-engineer, vue-pro, websocket-engineer, wordpress-master
+agent-organizer, ai-engineer, api-designer, api-documenter, backend-architect, backend-security-coder, bash-pro, build-engineer, build-error-resolver, c-pro, cli-developer, cloud-architect, code-reviewer, cpp-pro, csharp-pro, data-engineer, data-researcher, data-scientist, database-architect, database-optimizer, database-reviewer, debugger, dependency-manager, deployment-engineer, design-system-architect, devops-engineer, devops-incident-responder, devops-troubleshooter, django-pro, doc-updater, docs-architect, documentation-pro, dotnet-core-pro, dotnet-framework-pro, dx-optimizer, e2e-runner, electron-pro, elixir-pro, event-sourcing-architect, fastapi-pro, flutter-pro, frontend-developer, frontend-security-coder, full-stack-developer, go-build-resolver, go-reviewer, golang-pro, graphql-architect, haskell-pro, hybrid-cloud-architect, incident-responder, ios-pro, java-pro, javascript-pro, julia-pro, kotlin-pro, kubernetes-architect, legacy-modernizer, llm-architect, mcp-developer, mermaid-pro, microservices-architect, ml-engineer, mlops-engineer, mobile-developer, mobile-security-coder, monorepo-architect, network-engineer, nextjs-pro, observability-engineer, penetration-tester, performance-engineer, php-pro, planner, platform-engineer, posix-shell-pro, postgres-pro, product-manager, prompt-engineer, python-pro, python-reviewer, qa-pro, rails-pro, react-pro, refactor-cleaner, research-analyst, ruby-pro, rust-pro, scala-pro, security-reviewer, service-mesh-pro, spring-boot-pro, sql-pro, sre-engineer, swift-pro, tdd-guide, technical-writer, terraform-pro, test-automator, threat-modeling-pro, tutorial-engineer, typescript-pro, ui-designer, ux-designer, vector-database-engineer, vue-pro, websocket-engineer, wordpress-master
 
 </details>
 
@@ -53,7 +53,7 @@ Every agent was manually reviewed with full reads of all available sources. No a
 
 ## Features
 
-- **109 Specialized Agents**: Development, DevOps, security, data science, ML/AI, architecture, business
+- **108 Specialized Agents**: Development, DevOps, security, data science, ML/AI, architecture, business
 - **Research-Optimized**: Structure validated against n=600 evaluation data
 - **Decision Tables**: Every agent encodes when-to-choose-what guidance
 - **Anti-Patterns**: Prevent known failure modes specific to each domain
