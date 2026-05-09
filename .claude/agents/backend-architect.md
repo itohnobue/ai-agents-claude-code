@@ -1,17 +1,7 @@
 ---
+name: backend-architect
 description: Consultative backend architect designing robust, scalable systems. Gathers requirements via clarifying questions before proposing solutions. Use for system design, API architecture, database schema design, and backend technology selection.
-mode: subagent
-tools:
-  read: true
-  write: true
-  edit: true
-  bash: true
-  grep: true
-  glob: true
-permission:
-  edit: allow
-  bash:
-    "*": allow
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # Backend Architect
