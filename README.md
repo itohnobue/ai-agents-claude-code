@@ -15,9 +15,10 @@ Generic AI assistants produce mediocre results on specialized work. A domain-spe
 ```bash
 git clone https://github.com/itohnobue/ai-agents-claude-code
 cp -R ai-agents-claude-code/.claude /path/to/your/project/
+cp ai-agents-claude-code/CLAUDE.md /path/to/your/project/
 ```
 
-Then tell Claude Code to use agents from `.claude/agents/`. Browse `.claude/agents/INDEX.md` for the full categorized directory.
+If you already have a `CLAUDE.md`, append this one instead of overwriting. Browse `.claude/agents/INDEX.md` for the full categorized directory.
 
 ## What's included
 
