@@ -36,11 +36,11 @@ Prefer Ruby idioms and conventions over manual implementations.
 
 | Do | Don't | Why |
 |----|-------|-----|
-| `array.map { |x| x.upcase }` | Manual loop with `<<` | Enumerable methods are the Ruby way |
-| `hash.fetch(:key, default)` | `hash[:key] || default` | `fetch` raises `KeyError` on missing keys |
+| `array.map { \|x\| x.upcase }` | Manual loop with `<<` | Enumerable methods are the Ruby way |
+| `hash.fetch(:key, default)` | `hash[:key] \|\| default` | `fetch` raises `KeyError` on missing keys |
 | `str.freeze` for string literals | Repeated unfrozen string allocation | Reduces object allocations in hot loops |
 | `case obj when String` | `if obj.is_a?(String)` | `case` with `when` is more idiomatic |
-| `&:method_name` | `{ |x| x.method_name }` | Shorter, clearer for simple transforms |
+| `&:method_name` | `{ \|x\| x.method_name }` | Shorter, clearer for simple transforms |
 | String interpolation `"Hello #{name}"` | `"Hello " + name` | Auto-calls `.to_s`, no `TypeError` |
 
 ## ActiveRecord Gotchas

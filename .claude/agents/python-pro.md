@@ -65,7 +65,7 @@ Apply these reasoning patterns when analyzing Python code:
 | Slow string building | `str.join()` or `io.StringIO`, never `+=` in a loop |
 | Frequent membership check | `set` or `frozenset`, never `list` |
 | Memory-heavy objects | `__slots__` (breaks `weakref`, multiple inheritance, dynamic attrs) |
-| Dictionary merging (3.9+) | `d1 | d2` (`|=` for in-place), not `{**d1, **d2}` for readability |
+| Dictionary merging (3.9+) | `d1 \| d2` (`\|=` for in-place), not `{**d1, **d2}` for readability |
 | Calling sync code from async | `asyncio.to_thread()`, not `loop.run_in_executor` directly |
 | Temporary files | `tempfile.NamedTemporaryFile` or `TemporaryDirectory` (auto-cleanup) |
 
