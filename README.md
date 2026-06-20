@@ -1,6 +1,6 @@
 # AI Agents
 
-108 specialized AI agents for [Claude Code](https://claude.ai/download). Each agent is a domain expert — loaded on demand as a Markdown file, applied to the current task, then discarded. No subprocesses, no configuration, no dependencies.
+111 specialized AI agents for [Claude Code](https://claude.ai/download). Each agent is a domain expert — loaded on demand as a Markdown file, applied to the current task, then discarded. No subprocesses, no configuration, no dependencies.
 
 ## Why use it
 
@@ -9,6 +9,20 @@ Generic AI assistants produce mediocre results on specialized work. A domain-spe
 - **PostgreSQL migration?** Load `postgres-pro` — it knows indexing strategies, migration patterns, and when to use BRIN vs B-tree.
 - **SwiftUI refactor?** Load `swift-pro` — it understands actor isolation, `@MainActor` rules, and iOS lifecycle pitfalls.
 - **Security audit?** Load `security-reviewer` — OWASP Top 10, injection vectors, auth bypass patterns.
+
+## Agent Quality — Real-Project Tested
+
+All 111 agents have been tested and optimized through a rigorous methodology:
+
+**Method:** Each agent was tested in a 3-way comparison (original / polished / smart-applied) on real production codebases — not synthetic tasks. Test projects included C++ geostatistics libraries (hpgl-reborn), Python data parsers (pylasdev), Swift email clients (arcaios), Python/Qt desktop apps (pe_mac), and C# Outlook add-ins (peoutlook).
+
+**Result:** The winning variant for each agent was selected based on objective criteria: finding accuracy, evidence quality, cross-file tracing depth, and zero false positives. Agents were compared head-to-head against Claude Code's own native subagents — **our agents won every comparison.**
+
+**Cognitive Mode Tags:** Each agent in INDEX.md carries a Mode tag (TRACE / SWEEP / KNOW) derived from these tests, indicating which cognitive approach it's best at. This helps match the right agent to the task type.
+
+- **TRACE** — best at following data/logic/flow through code (bug hunting, pipeline analysis)
+- **SWEEP** — best at systematic checklist verification (security audits, idiom reviews)
+- **KNOW** — best at applying deep domain/framework expertise (.NET, Spring, Django)
 
 ## Quick Start
 
