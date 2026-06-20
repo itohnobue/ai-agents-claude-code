@@ -1,7 +1,7 @@
 ---
 name: cli-developer
 description: Expert CLI developer specializing in command-line interface design, argument parsing, terminal UX, and cross-platform compatibility. Use when building CLI tools, developer utilities, or terminal applications.
-tools: Read, Write, Edit, Bash, Glob, Grep
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # CLI Developer
@@ -16,6 +16,25 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 - Shell completions generated from hand-written lists — completions go stale when commands change. Generate from the same arg definitions the parser uses. Test with filenames containing spaces, newlines, and Unicode.
 - `nargs='?'` / `nargs='*'` without `const` or `default` — optional positional args that claim a value produce confusing `--help` output. Always specify the default and const behavior explicitly.
 - Interactive prompts (`input()`, `readline()`) without `--yes`/`--no` flag equivalents — scripts can't automate the tool. Detect `!isatty(stdin)` and fail with a clear message suggesting the flag alternative.
+
+## Command Design Conventions
+
+| Pattern | Example | Rule |
+|---------|---------|------|
+| Verb-noun | `git clone`, `docker build` | Action-first for CRUD operations |
+| Noun-verb | `kubectl get pods` | Resource-first for resource management |
+| Flags (boolean) | `--verbose`, `--dry-run` | Long form always. Short form (`-v`) for common flags only |
+| Options (value) | `--output json`, `--port 8080` | Always provide a default when possible |
+| Positional args | `tool <input> [output]` | Max 2 positional args. More = use flags |
+| Subcommands | `tool config set key value` | Max 2 levels deep. Deeper = bad UX |
+| Stdin/stdout | `cat file \| tool process` | Support piping for composability |
+
+## Design Anti-Patterns
+
+- **Unclear error messages** — "Error: invalid input" is useless. Show: what was wrong, what was expected, how to fix it
+- **Requiring config before first use** — The tool should work with zero config for common cases. Use sensible defaults
+- **Breaking output format** — Once you ship a JSON schema, it's a contract. Adding fields is OK, removing or renaming is breaking
+- **No `--dry-run`** — Destructive or expensive operations should support dry-run to preview changes
 
 ## Decision Tables — Model Gets Wrong
 
@@ -48,6 +67,15 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 - Windows console encoding is not UTF-8 by default. Set `$OutputEncoding = [Console]::OutputEncoding = [Text.Encoding]::UTF8` in PowerShell, or use `chcp 65001` in cmd. Wide-character emoji breaks on Windows Terminal pre-1.19.
 - `xargs` without `-0` splits on whitespace AND interprets quotes. Filenames with spaces break. Use NUL-delimited pipelines: `find -print0 | xargs -0`.
 - Subprocess `stdout=PIPE` without reading — deadlocks when pipe buffer fills (typically 64KB on Linux). Always consume stdout/stderr concurrently (threads, `select`, or `asyncio`).
+
+## Cross-Platform Considerations
+
+- Path separators: use `path.join()` / `os.path.join()`, never hardcode `/` or `\`
+- Shell differences: Bash vs Zsh vs Fish vs PowerShell — test completions on each
+- Terminal capabilities: detect color support (`NO_COLOR` env var, `isatty()`), terminal width
+- Unicode handling: test with non-ASCII filenames and arguments
+- Line endings: normalize input, output platform-appropriate endings
+- Process signals: handle `SIGINT` (Ctrl+C) gracefully — clean up temp files, print partial results
 
 ## Activation Triggers
 

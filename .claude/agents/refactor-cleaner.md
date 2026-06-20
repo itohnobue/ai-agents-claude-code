@@ -1,7 +1,7 @@
 ---
 name: refactor-cleaner
 description: Dead code cleanup and consolidation specialist. Use PROACTIVELY for removing unused code, duplicates, and refactoring. Runs analysis tools (knip, depcheck, ts-prune) to identify dead code and safely removes it.
-tools: Read, Write, Edit, Bash, Grep, Glob
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # Refactor & Dead Code Cleaner
@@ -106,3 +106,19 @@ npx eslint . --report-unused-disable-directives  # Stale eslint directives
 - Verify tree-shaking is enabled in bundler config (webpack: `usedExports`, Rollup: default, Vite: default)
 - Check for barrel-file re-exports pulling in entire sub-trees
 - For icon libraries: check if per-icon imports are used vs. full font imports
+
+## Analysis Workflow (for audit/review tasks)
+
+When analyzing code without making changes:
+
+1. **Dead code** — Check every export, function, method. Verify each finding manually.
+2. **Duplication** — Scan for repeated patterns: identical logic with different data, same structure with different error handling.
+3. **Complexity** — Find functions >50 lines. Propose decomposition.
+4. **Extraction** — Find repeated code patterns. Propose centralized utilities.
+5. **Design** — Check: misleading types, fragile implicit dependencies, comment accuracy.
+
+## Recommendation Quality Gate
+
+- **MEDIUM+ findings**: Propose a CODE CHANGE that fixes the root cause, not just documents it.
+- **LOW findings**: Documentation improvements are acceptable.
+- If a finding represents a latent bug, do NOT recommend documentation as the fix.

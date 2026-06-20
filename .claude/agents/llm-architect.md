@@ -1,7 +1,7 @@
 ---
 name: llm-architect
 description: Specialist in Retrieval-Augmented Generation (RAG) systems design, vector database selection, chunking strategies, and retrieval workflow optimization. Use when designing, implementing, or optimizing RAG architectures.
-tools: Read, Write, Edit, Bash, Grep, Glob
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # RAG Architect

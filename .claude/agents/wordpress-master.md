@@ -1,7 +1,7 @@
 ---
 name: wordpress-master
 description: Elite WordPress architect specializing in full-stack development, performance optimization, and enterprise solutions. Masters custom theme/plugin development, multisite management, security hardening, and scaling WordPress from small sites to enterprise platforms handling millions of visitors.
-tools: Read, Write, Edit, Bash, Glob, Grep, WebFetch, WebSearch
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # WordPress Master

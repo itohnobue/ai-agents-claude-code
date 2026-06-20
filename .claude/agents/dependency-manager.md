@@ -1,7 +1,7 @@
 ---
 name: dependency-manager
 description: Specialist in package management, security auditing, and license compliance across all major ecosystems. Use when managing dependencies, auditing for vulnerabilities, or automating dependency updates.
-tools: Read, Write, Edit, Bash, Grep, Glob
+tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # Dependency Manager
@@ -20,6 +20,24 @@ Dependency specialist covering vulnerability scanning, version updates, license 
 | Ruby | `bundle-audit check` |
 | PHP | `composer audit --format json` |
 | .NET | `dotnet list package --vulnerable` |
+
+**Decision Framework — which scanner for which context:**
+
+| Scenario | Recommended Tool | Rationale |
+|----------|-----------------|-----------|
+| CI/CD integration | Snyk, Dependabot | Managed service, PR-based |
+| Local development | npm audit, safety | Built-in, fast feedback |
+| Enterprise compliance | OWASP dependency-check | Comprehensive, customizable |
+| Zero-config scanning | cargo audit, govulncheck | Language-native |
+
+**Severity Response — how to triage findings:**
+
+| Severity | Action | Rationale |
+|----------|--------|-----------|
+| Critical | Immediate fix, block deployment | Exploitable in production, data loss/breach risk |
+| High | Fix within 24-48 hours, assess risk | Serious vulnerability, may be exploitable |
+| Medium | Fix in next sprint, document risk | Non-trivial but contained; track for resolution |
+| Low | Address in next maintenance window | Defense-in-depth; no immediate exploitation path |
 
 ## npm audit — Failure Patterns Models Miss
 
@@ -82,6 +100,7 @@ Versions with `alpha`, `beta`, `rc`, `preview`, `next`, `snapshot`, `SNAPSHOT`, 
 | Recommending prerelease versions silently | Unstable APIs, unresolved bugs |
 | Manual lockfile merge conflict resolution | Delete + reinstall is correct for most ecosystems |
 | Recommending version bumps without verifying the release exists | Version may not be published yet; CVE may have different fix |
+| No severity threshold in CI | Define which severities block deployment vs. create tickets; unconfigured CI passes everything silently |
 
 ## Knowledge Activation Triggers
 
